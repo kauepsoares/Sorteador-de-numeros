@@ -14,7 +14,7 @@ function sortear() {
 
     if (!document.getElementById('repetir').checked) {
         if (quantidade > totalNumerosDisponiveis) {
-            exibirErro('Não é possível sortear mais números únicos do que disponíveis. Ajuste a quantidade ou o intervalo.');
+            exibirErro('Não é possível sortear mais números únicos com as informações colocadas. Ajuste a quantidade ou o intervalo.');
             return;
         }
         listaNumerosSorteados = sortearNumerosUnicos(quantidade, de, ate);
