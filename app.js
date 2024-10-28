@@ -1,14 +1,14 @@
 function sortear() {
     const quantidade = parseInt(document.getElementById('quantidade').value);
-    const de = parseInt(document.getElementById('de').value);
-    const ate = parseInt(document.getElementById('ate').value);
+    const valorMinimo = parseInt(document.getElementById('de').value);
+    const valorMaximo = parseInt(document.getElementById('ate').value);
 
-    if (de >= ate) {
+    if (valorMinimo >= valorMaximo) {
         exibirErro('Campo "Do número" deve ser inferior ao campo "Até o número".');
         return;
     }
 
-    const totalNumerosDisponiveis = ate - de + 1;
+    const totalNumerosDisponiveis = valorMaximo - valorMinimo + 1;
 
     let listaNumerosSorteados = []
 
@@ -17,9 +17,9 @@ function sortear() {
             exibirErro('Não é possível sortear mais números únicos com as informações colocadas. Ajuste a quantidade ou o intervalo.');
             return;
         }
-        listaNumerosSorteados = sortearNumerosUnicos(quantidade, de, ate);
+        listaNumerosSorteados = sortearNumerosUnicos(quantidade, valorMinimo, valorMaximo);
     } else {
-        listaNumerosSorteados = sortearNumerosRepetidos(quantidade, de, ate);
+        listaNumerosSorteados = sortearNumerosRepetidos(quantidade, valorMinimo, valorMaximo);
     }
 
     exibirResultado(listaNumerosSorteados);
@@ -27,10 +27,10 @@ function sortear() {
 }
 
 
-function sortearNumerosUnicos(quantidade, de, ate) {
+function sortearNumerosUnicos(quantidade, valorMinimo, valorMaximo) {
     let numeros = [];
     while (numeros.length < quantidade) {
-        let numeroSorteado = numeroAleatorio(de, ate);
+        let numeroSorteado = numeroAleatorio(valorMinimo, valorMaximo);
         if (!numeros.includes(numeroSorteado)) {
             numeros.push(numeroSorteado);
         }
@@ -38,10 +38,10 @@ function sortearNumerosUnicos(quantidade, de, ate) {
     return numeros;
 }
 
-function sortearNumerosRepetidos(quantidade, de, ate) {
+function sortearNumerosRepetidos(quantidade, valorMinimo, valorMaximo) {
     let numeros = [];
     for (let i = 0; i < quantidade; i++) {
-        numeros.push(numeroAleatorio(de, ate));
+        numeros.push(numeroAleatorio(valorMinimo, valorMaximo));
     }
     return numeros;
 }
