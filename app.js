@@ -3,23 +3,17 @@ function sortear() {
     const valorMinimo = parseInt(document.getElementById('de').value);
     const valorMaximo = parseInt(document.getElementById('ate').value);
 
-    if (valorMinimo >= valorMaximo) {
-        exibirErro('Campo "Do número" deve ser inferior ao campo "Até o número".');
-        return;
-    }
+    if (valorMinimo >= valorMaximo) return exibirErro('Campo "Do número" deve ser inferior ao campo "Até o número".');
 
     const totalNumerosDisponiveis = valorMaximo - valorMinimo + 1;
 
     let listaNumerosSorteados = []
 
-    if (!document.getElementById('repetir').checked) {
-        if (quantidade > totalNumerosDisponiveis) {
-            exibirErro('Não é possível sortear mais números únicos com as informações colocadas. Ajuste a quantidade ou o intervalo.');
-            return;
-        }
-        listaNumerosSorteados = sortearNumerosUnicos(quantidade, valorMinimo, valorMaximo);
-    } else {
+    if (document.getElementById('repetir').checked) {
         listaNumerosSorteados = sortearNumerosRepetidos(quantidade, valorMinimo, valorMaximo);
+    } else {
+        if (quantidade > totalNumerosDisponiveis) return exibirErro('Não é possível sortear mais números únicos com as informações colocadas. Ajuste a quantidade ou o intervalo.');
+        listaNumerosSorteados = sortearNumerosUnicos(quantidade, valorMinimo, valorMaximo);
     }
 
     exibirResultado(listaNumerosSorteados);
